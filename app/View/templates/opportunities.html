@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <center><h2>Open positions</h2></center>
+
+    {% if form %}
+      <center>
+      <form action="" method="POST">
+	<div style="display: flex; width: 70%">
+	    {{ form.hidden_tag() }}
+	    <div style="flex: 1">Sort By: {{ form.sort(class="formselect") }}</div>
+	    <div style="flex: 1">{{ form.sortbyrecommendedposts(class="checkbox") }} Recommended only</div>
+	    <div style="flex: 1">{{ form.submit(class="button") }}</div>
+	</div>
+      </form>
+      </center>
+    {% endif %}
+
+    <div class="opportunity-list">
+      {% for post in posts %}
+        <div class="post-box">
+          {% include '_post.html' %}
+          {% if current_user.type == 1 %}
+          <a href="{{url_for('routes.view_post', postid=post.id)}}">View Details</a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+{% endblock %}

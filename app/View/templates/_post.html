@@ -1,0 +1,72 @@
+  <div class="opportunity-box">
+    <div style="display: flex">
+      <div style="margin-top: -10px">
+	<span style="font-size: 32; vertical-align: baseline;"><a href="{{ url_for('routes.view_post', postid=post.id) }}">{{ post.title }}</a></span>
+      </div>
+
+      <div style="flex-grow: 1; text-align: right">
+	{% for application in current_user.applications %}
+	  {% if application.postid == post.id %}
+	    {% if application.status == 1 %}
+	      <div><span style="vertical-align: middle;">Submitted</span> <img style="vertical-align: middle;" src="{{ url_for('static', filename='icon/file-text.svg') }}"></div>
+	    {% elif application.status == 2 %}
+	      <div><span style="vertical-align: middle;">Awaiting interview</span> <img style="vertical-align: middle;" src="{{ url_for('static', filename='icon/user.svg') }}"></div>
+	    {% elif application.status == 3 %}
+	      <div>Hired <img style="vertical-align: middle;" src="{{ url_for('static', filename='icon/file-text.svg') }}"></div>
+	    {% elif application.status == 4 %}
+	      <div>Rejected <img style="vertical-align: middle;" src="{{ url_for('static', filename='icon/x-circle.svg') }}"></div>
+	    {% elif application.status == 5 %}
+	      <div>Unavailable <img style="vertical-align: middle;" src="{{ url_for('static', filename='icon/alert-triangle.svg') }}"></div>
+	    {% endif %}
+	  {% endif %}
+	{% endfor %}
+      </div>
+    </div>
+
+    <div class="opportunity-table">
+      <table>
+	<tr>
+	  <td>Start date</td>
+	  <td>{{ post.startdate }}</td>
+	</tr>
+	<tr>
+	  <td>End date</td>
+	  <td>{{ post.enddate }}</td>
+	</tr>
+	<tr>
+	  <td>Goals</td>
+	  <td>{{ post.goals }}</td>
+	</tr>
+	<tr>
+	  <td>Commitments</td>
+	  <td>{{ post.commitment }}</td>
+	</tr>
+	<tr>
+	  <td>Qualifications</td>
+	  <td>{{ post.qualifications }}</td>
+	</tr>
+	<tr>
+	  <td>Tags</td>
+	  <td>
+	    {% for p in post.get_tags().all() %}
+	      {{ '{}, '.format(p.name) }}
+	    {% endfor %}
+	  </td>
+	</tr>
+      </table>
+    </div>
+
+    <div>
+      {% if current_user.is_applied(post) == False and current_user.type == 2 %}
+      <span><a href="{{ url_for('routes.tryapply', postid=post.id) }}">Apply</a></span>
+      {% elif current_user.type == 2 and current_user.is_applied(post) == True %}
+	<form action="{{url_for('routes.unapply', postid=post.id)}}" method="POST">
+	<input type="submit" value="Unapply" class="button">
+	</form>
+      {% else %}
+	<form action="{{url_for('routes.delete', post_id=post.id)}}" method="POST">
+	  <input type="submit" value="Delete" class="button">
+	</form>
+      {% endif %}
+    </div>
+  </div>

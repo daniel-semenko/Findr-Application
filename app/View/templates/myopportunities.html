@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <center><h2>Your open positions / <a href="{{ url_for('routes.post') }}">New opportunity</a></h2></center>
+
+  <div class="opportunity-list">
+    {% if form %}
+      <form action="" method="POST">
+	{{ form.hidden_tag() }}
+	Sort By: {{ form.sort(class="formselect") }} {{ form.submit(class="button") }}
+      </form>
+    {% endif %}
+    
+    {% for post in posts %}
+      <div class="post-box">
+	{% include '_post.html' %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

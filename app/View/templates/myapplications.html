@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if user.deletedapplications %}
+    <h2>Deleted positions</h2>
+    {% for a in user.deletedapplications %}
+      The position for {{a.title}} has been deleted. <br>
+    {% endfor %}
+    <a href="{{ url_for('routes.clear', studentid=user.id) }}">Clear</a>
+  {% endif %}
+
+  {% if user.applications %}
+    <center><h2>Your applications</h2></center>
+
+    <div class="opportunity-list">
+      {% for application in user.applications %}
+	{% set post = application.postapplied %}
+	<div class="post-box">
+	  {% include '_post.html' %}
+	</div>
+	<div class="application-box">
+	  <div style="border-radius: 2px; padding: 5px; padding-right: 15px; font-size: 20; text-align: right;">
+	    {{ application.name }} / {{ application.email }}
+	  </div>
+
+	  <div style="background-color: white; border-radius: 2px; padding: 5px; padding-left: 15px; margin-top: 10px; border: 1px solid black">
+	    {{ application.statement }}
+	  </div>
+	</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <h2>No active applications</h2>
+  {% endif %}
+{% endblock %}

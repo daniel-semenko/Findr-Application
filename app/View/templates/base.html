@@ -1,0 +1,65 @@
+<html>
+  <head>
+    {% if title %}
+      <title>{{ title }} - Findr</title>
+    {% else %}
+      <title> Welcome to Findr!</title>
+    {% endif %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {{ moment.include_moment() }}
+  </head>
+
+  <body>
+    <div class="nav-container">
+      <span class="logo">Findr</span>
+
+      <div class="nav-bar">
+	<table>
+          <tr>
+            {% if current_user.type == 1 %}
+              <td><a href="{{ url_for('routes.myopportunities') }}" class="button">Home</a></td>
+            {% else %}
+              <td><a href="{{ url_for('routes.opportunities') }}" class="button">Home</a></td>
+            {% endif %}
+
+            <td><a href="{{ url_for('routes.display_profile') }}" class="button">Profile</a></td>
+
+            {% if current_user.type == 2 %}
+              <td><a href="{{ url_for('routes.myapplications') }}" class="button">Applications</a></td>
+            {% endif %}
+
+	    {% if current_user.is_anonymous %}
+              <td style="width: 100%; text-align: right;"><a href="{{ url_for('auth.login') }}" class="button">Login</a></td>
+	    {% else %}
+              <td style="width: 100%; text-align: right;">
+                {% if current_user.type == 1 %}
+	          Faculty / <b>{{current_user.firstname}} {{current_user.lastname}}</b>
+                {% else %}
+                  Student / <b>{{current_user.firstname}} {{current_user.lastname}}</b>
+		{% endif %}
+	      </td>
+
+              <td><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></td>
+            {% endif %}
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for message in messages %}
+            <div>{{ message }}</div>
+	  {% endfor %}
+	</div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="body-container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

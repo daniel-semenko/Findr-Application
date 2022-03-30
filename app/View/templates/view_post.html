@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <center><h2>{{ post.author.firstname }} {{ post.author.lastname }} / {{ post.title }}</h2></center>
+
+  <div class="opportunity-list">
+    <div class="post-box">
+      {% include '_post.html' %}
+    </div>
+  </div>
+
+  {% if current_user.type == 2 and current_user.is_applied(post) == False %}
+    {% for application in current_user.applications %}
+      {% if application.postid == post.id %}
+	<span class="tagitem">{{ '{}'.format(application.status) }}</span>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <div class="application-list">
+      <center><h2>Applications</h2></center>
+
+      {% for application in post.view_post %}
+        <div class="application-box">
+	  <div style="margin-top: -10px; margin-bottom: 10px;">
+	    <span style="font-size: 32;"><a href="{{ url_for('routes.display_profile', user_id=application.studentapplied.id) }}">{{ application.studentapplied.firstname }} {{ application.studentapplied.lastname }}</a>'s application</span>
+	  </div>
+	  <div class="profile-table">
+	    <table>
+	      <tr>
+		<td>Major</td>
+		<td>{{ application.studentapplied.major }}</td>
+	      </tr>
+	      <tr>
+		<td>GPA</td>
+		<td>{{ application.studentapplied.gpa }}</td>
+	      </tr>
+	      <tr>
+		<td>Languages</td>
+		<td>
+		  {% for l in application.studentapplied.languages %}
+		  <li>{{ l.languagepicked.name }}</li>
+		  {% endfor %}
+		</td>
+	      </tr>
+	      <tr>
+		<td>Electives</td>
+		<td>
+		  {% for l in application.studentapplied.classes %}
+		  <li>{{ l.classtaken.coursenum }}</li>
+		  {% endfor %}
+		</td>
+	      </tr>
+	      <tr>
+		<td>Interests</td>
+		<td>
+		  {% for l in application.studentapplied.fields %}
+		  <li>{{ l.fieldpicked.name }}</li>
+		  {% endfor %}
+		</td>
+	      </tr>
+		  <tr>
+			  <td>Statement</td>
+			  <td>
+				{{ application.statement }}
+			  </td>
+		  </tr>
+		</tr>
+		<tr>
+			<td>Reference Name</td>
+			<td>
+			  {{ application.name }}
+			</td>
+		</tr>
+	</tr>
+	<tr>
+		<td>Reference Email</td>
+		<td>
+		  {{ application.email }}
+		</td>
+	</tr>
+	    </table>
+	  </div>
+
+	  <div style="font-size: 20; margin: 10px 0 10px 0;">Prior experience</div>
+
+	  <div class="profile-experience">
+	    {{ application.studentapplied.prior_experience }}
+	  </div>
+
+	  <div style="font-size: 20; margin: 10px 0 10px 0;">Reference</div>
+
+	  <div class="profile-experience">
+	    {{ application.name }}
+	    {{ application.email }}
+	    {{ application.statement }}
+	  </div>
+
+	  {% if application.studentapplied.applications %}
+	    <div style="font-size: 20; margin: 10px 0 10px 0;">Other active applications</div>
+
+	    <div class="profile-experience" style="margin-bottom: 20px">
+	      <ul style="margin: 0; margin-left: -20px">
+		{% for appl in application.studentapplied.applications %}
+		  {% if appl.postapplied != application.postapplied %}
+		    <li><a href="">{{ appl.postapplied.author.firstname }} {{ appl.postapplied.author.lastname }}</a>
+		      / <a href="">{{ appl.postapplied.title }}</a>:
+		      {% if appl.status == 1 %}
+		        Submitted
+		      {% elif appl.status == 2 %}
+		        Awaiting interview
+		      {% elif appl.status == 3 %}
+		        Hired
+		      {% elif appl.status == 4 %}
+		        Rejected
+		      {% elif appl.status == 5 %}
+		        Unavailable
+		      {% endif %}
+		    </li>
+		  {% endif %}
+		{% endfor %}
+	      </ul>
+	    </div>
+	  {% endif %}
+
+	  {% if application.status == 1 %}
+	    <div style="display: flex; height: 25px">
+	      <form action="{{url_for('routes.markforinterview', postid = application.postapplied.id, studentid = application.studentapplied.id)}}" method="post">
+		<input type="submit" value="Mark for Interview" class="button">
+	      </form>
+
+	      <form action="{{url_for('routes.markforhire', postid = application.postapplied.id, studentid = application.studentapplied.id)}}" method="post">
+		<input type="submit" value="Hire" class="button">
+	      </form>
+
+	      <form action="{{url_for('routes.markforreject', postid = application.postapplied.id, studentid = application.studentapplied.id)}}" method="post">
+		<input type="submit" value="Reject" class="button">
+	      </form>
+	    </div>
+	  {% elif application.status > 1 %}
+	    Current application status:
+
+	    {% if application.status == 2 %}
+	      <b>Marked for interview.</b>
+	      <form action="{{url_for('routes.markforhire', postid = application.postapplied.id, studentid = application.studentapplied.id)}}" method="post">
+		<input type="submit" value="Mark Hired" class="button">
+	      </form>
+	      <form action="{{url_for('routes.markforreject', postid = application.postapplied.id, studentid = application.studentapplied.id)}}" method="post">
+		<input type="submit" value="Mark Rejected" class="button">
+	      </form>
+	    {% endif %}
+
+	    {% if application.status == 3 %}
+	      <b>Hired.</b>
+	    {% endif %}
+
+	    {% if application.status == 4 %}
+	      <b>Rejected.</b>
+	    {% endif %}
+	  {% endif %}
+	</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

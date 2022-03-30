@@ -1,0 +1,402 @@
+body {
+    font-family: 'Latin Modern';
+    background-color: #fcfcfc;
+}
+
+@font-face {
+    font-family: 'Latin Modern';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/LM-regular.woff2') format('woff2'),
+	 url('https://latex.vercel.app/fonts/LM-regular.woff') format('woff'),
+	 url('https://latex.vercel.app/fonts/LM-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Latin Modern';
+    font-style: italic;
+    font-weight: normal;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/LM-italic.woff2') format('woff2'),
+	 url('https://latex.vercel.app/fonts/LM-italic.woff') format('woff'),
+	 url('https://latex.vercel.app/fonts/LM-italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Latin Modern';
+    font-style: normal;
+    font-weight: bold;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/LM-bold.woff2') format('woff2'),
+	 url('https://latex.vercel.app/fonts/LM-bold.woff') format('woff'),
+	 url('https://latex.vercel.app/fonts/LM-bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Latin Modern';
+    font-style: italic;
+    font-weight: bold;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/LM-bold-italic.woff2') format('woff2'),
+	 url('https://latex.vercel.app/fonts/LM-bold-italic.woff') format('woff'),
+	 url('https://latex.vercel.app/fonts/LM-bold-italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Libertinus';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/Libertinus-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Libertinus';
+    font-style: italic;
+    font-weight: normal;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/Libertinus-italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Libertinus';
+    font-style: normal;
+    font-weight: bold;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/Libertinus-bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Libertinus';
+    font-style: italic;
+    font-weight: bold;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/Libertinus-bold-italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Libertinus';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/Libertinus-semibold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Libertinus';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url('https://latex.vercel.app/fonts/Libertinus-semibold-italic.woff2') format('woff2');
+}
+
+.textinput {
+    width: 100%;
+}
+
+.nav-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 48px;
+    letter-spacing: -3;
+}
+
+.nav-bar {
+    background: #F0F0F0;
+    border-radius: 2;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.nav-bar table tr td {
+    vertical-align: middle;
+}
+
+.create-box {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.create-box table {
+    flex: 1;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 4px;
+    padding: 30px;
+    width: 100%;
+}
+
+.create-box table tr td textarea {
+    width: 100%;
+}
+
+a:hover {
+    color:#2387D9;
+}
+
+a {
+    text-decoration: none;
+}
+
+.button {
+    padding: 2px 8px 2px 8px;
+    margin: 3px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background-color: ivory;
+    border: 1px solid grey;
+    color: black;
+    /* font-size: 16px; */
+}
+
+.button:hover {
+    background-color: #157dd3;
+    color: white;
+    cursor:pointer;
+}
+
+.posttable {
+    width : 100%;
+    margin: 10px;
+    padding: 20px;
+}
+
+.posttitle {
+    text-align: center;
+    font-weight: bold;
+    font-family: Tahoma;
+    font-size: large;
+    font-style: normal;
+    padding: 10px 0px 10px 0px;
+}
+
+.poststartenddate {
+    text-align: center;
+    font-weight: lighter;
+    font-family: Tahoma;
+    font-size: medium;
+    font-style: italic;
+    padding: 10px 0px 10px 0px;
+}
+
+.postmessage {
+    font-family: Tahoma;
+    padding: 10px 0px 10px 0px;
+    font-style: normal;
+    font-size: medium;
+    margin: 0px;
+}
+
+.posttimestamp {
+    font-family: Tahoma;
+    font-weight: bold;
+    font-style: normal;
+    font-size: small;
+    padding: 2px 0px 0px 0px;
+}
+
+.useritem{
+    text-align: center;
+    padding: 3px;
+    margin: 4px 3px 4px 3px;
+    color: blue;
+    text-transform: uppercase;
+}
+
+.likebtn {
+    margin: 0 auto;
+    height: 40px;
+    width: 50px;
+    border: 0px;
+    vertical-align: middle;
+    background-image: url("..//img//like.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+}
+
+.likebtn:hover {
+    background-image: url("..//img//like_hover.png");
+    cursor:pointer;
+}
+
+.flash-container {
+    background: #99c5ee;
+    font-family: Tahoma;
+    font-style: italic;
+    font-size: 16px;
+    padding: 15px;
+    width: 50%;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.login-box {
+    background: #F0F0F0;
+    padding: 20px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.body-container {
+    width:85%;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) {
+    .login-box {
+	width: 90%;
+    }
+    .body-container {
+	width: 100%;
+    }
+    .nav-container {
+	width: 100%;
+    }
+    .profile-experience {
+	margin-top: 10px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .profile-table {
+	/* margin-right: 10px; */
+    }
+    .profile-info {
+	display: flex;
+    }
+}
+
+table td, table td * {
+    vertical-align: top;
+}
+
+.opportunity-box {
+    background: #F0F0F0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.opportunity-list {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.application-list {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.application-box {
+    background-color: #E0E0E0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: -5px;
+}
+
+.opportunity-table {
+    flex: 1;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 3px;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.opportunity-table table td {
+    padding-right: 40px;
+}
+
+.opportunity-table table td:first-child {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.faculty-profile {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.profile-name {
+    text-transform: capitalize;
+}
+
+.profile-table {
+    flex: 1;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.profile-table table td {
+    padding-right: 40px;
+}
+
+.profile-table table td:first-child {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.profile-experience {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 2px;
+    flex: 1;
+}
+
+.profile-experience table {
+}
+
+.likecount {
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    font-size: large;
+}
+
+.formtitle {
+    width: 70%;
+    font-family: Tahoma;
+    margin: 10px 0px 10px 0px;
+    padding: 10px 10px 10px 10px;
+}
+
+.formbody {
+    width: 40%;
+    height: 15%;
+    padding: 10px 10px 10px 10px;
+    font-family: Tahoma;
+    margin: 10px 0px 10px 0px;
+}
+
+.formselect {
+    background-color: white;
+}
+
+.tagitem {
+    text-align: middle;
+    margin: 1px 1px 1px 1px;
+    padding: 2px 2px 2px 2px;
+    border: 1px solid black;
+    background-color: whitesmoke;
+}
+
+.forminput {
+    padding : 3px;
+    font-family: Tahoma;
+    font-size: 18px;
+    width: 100%;
+}

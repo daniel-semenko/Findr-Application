@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if form %}
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+      <div class="create-box">
+        <h2>New opportunity</h2>
+	<div>
+	  <table>
+	    <tr>
+	      <td>{{ form.title.label }}</td>
+	      <td>{{ form.title(class='textinput') }}</td>
+	    </tr>
+	    <tr>
+	      <td>{{ form.startdate.label }}</td>
+	      <td>{{ form.startdate(class='textinput') }}</td>
+	    </tr>
+	    <tr>
+	      <td>{{ form.enddate.label }}</td>
+	      <td>{{ form.enddate(class='textinput') }}</td>
+	    </tr>
+	    <tr>
+	      <td>{{ form.goals.label }}</td>
+	      <td>{{ form.goals(class='formbody') }}</td>
+	    </tr>
+	    <tr>
+	    <td>{{ form.commitment.label }}</td>
+	    <td>{{ form.commitment(class='formbody') }}</td>
+	    </tr>
+	    <tr>
+	    <td>{{ form.qualifications.label }}</td>
+	    <td>{{ form.qualifications(class='formbody') }}</td>
+	    </tr>
+	    <tr>
+	    <td>{{ form.fields.label }}</td>
+	    <td>{{ form.fields(class='forminput') }}</td>
+	    </tr>
+	  </table>
+	</div>
+
+	{% for error in form.title.errors %}
+	  <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+
+	{% for error in form.goals.errors %}
+	  <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+
+	{% for error in form.startdate.errors %}
+	  <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+
+	{% for error in form.enddate.errors %}
+	  <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+
+	{% for error in form.commitment.errors %}
+	  <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+
+	{% for error in form.qualifications.errors %}
+	  <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+
+	{% for error in form.fields.errors %}
+  	  <span style="color: red;">[{{ error }}]</span>
+	{% endfor %}
+
+	<center>{{ form.submit(class='button', style='margin-top: 20px; width: 100%') }}</center>
+      </div>
+    </form>
+  {% endif %}
+{% endblock %}
