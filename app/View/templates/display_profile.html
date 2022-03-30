@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if user.type == 2 %}
+  <h2><span class="profile-name">{{ user.firstname }} {{ user.lastname }}'s</span> Profile</h2>
+    <div class="profile-info">
+      <div class="profile-table">
+	<table>
+          <tr>
+	    <td>Name</td>
+	    <td>{{ user.firstname }} {{ user.lastname }}</td>
+          </tr>
+	  <tr>
+	    <td>WSU ID</td>
+	    <td>{{ user.wsuid }}</td>
+	  </tr>
+	  <tr>
+	    <td>Email</td>
+	    <td>{{ user.email }}</td>
+	  </tr>
+	  <tr>
+	    <td>Phone no.</td>
+	    <td>{{ user.phone }}</td>
+	  </tr>
+	  <tr>
+	    <td>Major</td>
+	    <td>{{ user.major }}</td>
+	</tr>
+	<tr>
+	  <td>GPA</td>
+	  <td>{{ user.gpa }}</td>
+	</tr>
+	<tr>
+	  <td>Est. grad date</td>
+	  <td>{{ user.graddate }}</td>
+	</tr>
+	<tr>
+	  <td>Languages</td>
+	  <td>
+	    {% for l in user.languages %}
+	      <li>{{ l.languagepicked.name }}</li>
+	    {% endfor %}
+	  </td>
+	</tr>
+	<tr>
+	  <td>Electives</td>
+	  <td>
+	    {% for l in user.classes %}
+	      <li>{{ l.classtaken.coursenum }}</li>
+	    {% endfor %}
+	  </td>
+	</tr>
+	<tr>
+	  <td>Interests</td>
+	  <td>
+	    {% for l in user.fields %}
+	      <li>{{ l.fieldpicked.name }}</li>
+	    {% endfor %}
+	  </td>
+	</tr>
+	</table>
+	</div>
+
+      <div class="profile-experience">
+	<div style="background-color:white; color:black; padding:10px;">
+          {{ user.prior_experience }}
+        </div>
+      </div>
+    </div>
+
+    {% if user == current_user %}
+      <p><a href="{{ url_for('auth.edit_profile') }}">Edit your profile</a></p>
+    {% endif %}
+  {% endif %}
+
+  {% if user.type == 1 %}
+    <center><h1>Faculty Profile</h1></center>
+    <table>
+      <tr>
+	<td>Name</td>
+	<td>{{ user.firstname }} {{ user.lastname }}</td>
+      </tr>
+      <tr>
+	<td>WSU ID</td>
+	<td>{{ user.wsuid  }}</td>
+      </tr>
+      <tr>
+	<td>Email</td>
+	<td>{{ user.email }}</td>
+      </tr>
+      <tr>
+	<td>Phone no.</td>
+	<td>{{ user.phone }}</td>
+      </tr>
+    </table>
+
+    {% if user == current_user %}
+      <p><a href="{{ url_for('auth.edit_profile') }}">Edit your profile</a></p>
+    {% endif %}
+
+      <center><h2>Open research positions</h2></center>
+
+    {% if user == current_user %}
+      <p><a href="{{ url_for('routes.post') }}">Post new position</a></p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

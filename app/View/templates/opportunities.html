@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Welcome to Findr!</h1>
+
+    <h2>Here are the opportunities!</h2>
+
+    {% if form %}
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+                Sort By: {{ form.sort(class="formselect") }} {{ form.sortbyrecommendedposts(class="checkbox") }} Display recommended research posts only? {{ form.submit(class="button") }}
+        </form>
+
+
+        <div class = "postlist">
+            {% for post in posts %}
+                <div class = "post-box">
+                    {% include '_post.html' %}
+                </div>
+            {% endfor %}
+        </div>
+
+        
+
+
+    {% endif %}
+
+{% endblock %}

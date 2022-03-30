@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Welcome to Findr!</h1>
+
+    <h2> {{ post.title }} </h2>
+    <b>Start Date: </b> {{ post.startdate }}
+    <b>End Date: </b> {{ post.enddate }}
+    <br>
+    <b>Goals:</b>
+    <br> 
+    {{ post.goals }}
+    <br>
+    <br>
+    <b>Commitments:</b>
+    <br>
+    {{ post.commitment }}
+    <br>
+    <br>
+    <b>Qualifications:</b>
+    <br>
+    {{ post.qualifications }} 
+    <br>
+    <br>
+    <div style="text-align: middle;">
+        {% for p in post.get_tags().all() %}
+            <span class = "tagitem">{{ '{}'.format(p.name) }} </span>
+        {% endfor %}
+    </div>
+    <br>
+    <br>
+    
+    {% if current_user.is_applied(post) == False %}
+        <form action="{{url_for('routes.apply', postid=post.id)}}" method="post">
+                <input type="submit" value="Apply"class="button">
+        </form>
+    {% else %}
+        <form action="{{url_for('routes.unapply', postid=post.id)}}" method="post">
+                <input type="submit" value="Unapply"class="button">
+        </form>
+    {% endif %}
+
+    
+
+    <a href="{{url_for('routes.opportunities')}}"> Return to Opportunities </a>
+
+    
+
+{% endblock %}

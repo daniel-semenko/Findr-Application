@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Welcome to Findr!</h1>
+
+    
+
+    {% if user.applications %}
+        <h2>Here are your current applications:</h2>
+
+        {% for application in user.applications %}
+            {% set post = application.postapplied %}
+            <div class = "postlist">
+                <table class = "posttable" style = "width:100%" valign="top">
+                    <tr valign = "center">
+                        <td width = "80%">
+                            <div class="posttitle"> {{post.title}} </div>
+                            <br>
+                            <div class="postmessage">
+                                <b>Goals:</b>
+                                <br> 
+                                {{ post.goals }}
+                                <br>
+                                <br>
+                                <b>Commitments:</b>
+                                <br>
+                                {{ post.commitment }}
+                                <br>
+                                <br>
+                                <b>Qualifications:</b>
+                                <br>
+                                {{ post.qualifications }}
+                                <br>
+                                <br>
+                                <br>
+                                <div style="text-align: middle;">
+                                    {% for p in post.get_tags().all() %}
+                                        <span class = "tagitem">{{ '{}'.format(p.name) }} </span>
+                                    {% endfor %}
+                                </div>
+                                <br>
+                                <br>
+                                <a href="{{url_for('routes.view_post', postid=post.id)}}"> View Post </a>
+                           </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <h2>Looks like you have no current applications.</h2>
+        <a href="{{url_for('routes.opportunities')}}">Link to Opportunities</a>
+    {% endif %}
+
+{% endblock %}

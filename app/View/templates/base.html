@@ -1,0 +1,53 @@
+<html>
+  <head>
+    {% if title %}
+      <title>{{ title }} - Findr </title>
+    {% else %}
+      <title> Welcome to Findr! </title>
+    {% endif %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {{ moment.include_moment() }}
+  </head>
+
+  <body>
+    <div class="nav-container">
+      <span class="logo">Findr</span>
+      <div class="nav-bar">
+	<table>
+          <tr>
+            <td>
+	      <a href="{{ url_for('routes.index') }}" class = "button">Home</a></td>
+
+        
+
+	      {% if current_user.is_anonymous %}
+                <td><a href="{{ url_for('auth.login') }}" class = "button"> Login </a></td>
+	      {% else %}
+                <td><a href="{{ url_for('auth.logout') }}" class = "button"> Logout </a></td>
+                {% if current_user.type == 1 %}
+                  <td>Faculty: <b>{{current_user.firstname}} {{current_user.lastname}}</b></td>
+                {% else %}
+                  <td>Student: <b>{{current_user.firstname}} {{current_user.lastname}}</b></td>
+                {% endif %}
+              {% endif %}
+            </tr>
+          </table>
+        </div>
+      </div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+    <div class="flash-container">
+          {% for message in messages %}
+            <div>{{ message }}</div>
+	  {% endfor %}
+    </div>
+	{% endif %}
+      {% endwith %}
+
+    <div class="body-container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

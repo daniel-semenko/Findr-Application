@@ -1,0 +1,50 @@
+<table class = "posttable" style = "width:100%" valign="top">
+    <tr valign = "center">
+        <td width = "80%">
+            <div class="posttitle"> {{post.title}} </div>
+            <br>
+            <div class="postmessage">
+                <b>Start Date: </b> {{ post.startdate }}
+                <b>End Date: </b> {{ post.enddate }}
+                <br>
+                <b>Goals:</b>
+                <br> 
+                {{ post.goals }}
+                <br>
+                <br>
+                <b>Commitments:</b>
+                <br>
+                {{ post.commitment }}
+                <br>
+                <br>
+                <b>Qualifications:</b>
+                <br>
+                {{ post.qualifications }}
+                <br>
+                <br>
+                <br>
+                <div style="text-align: middle;">
+                    {% for p in post.get_tags().all() %}
+                        <span class = "tagitem">{{ '{}'.format(p.name) }} </span>
+                    {% endfor %}
+                </div>
+                <br>
+                <br>
+                <a href="{{url_for('routes.view_post', postid=post.id)}}"> View Post </a>
+           </div>
+        </td>
+        <td width = "20%">
+            <div style="text-align: middle;">  
+                {% if current_user.is_applied(post) == False %}
+                        <form action="{{url_for('routes.apply', postid=post.id)}}" method="post">
+                                <input type="submit" value="Apply"class="button">
+                        </form>
+                {% else %}
+                        <form action="{{url_for('routes.unapply', postid=post.id)}}" method="post">
+                                <input type="submit" value="Unapply"class="button">
+                        </form>
+                {% endif %}
+            </div> 
+        </td>
+    </tr>
+</table>
