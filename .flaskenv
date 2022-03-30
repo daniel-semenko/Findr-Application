@@ -1,0 +1,2 @@
+FLASK_APP=findr.py
+FLASK_DEBUG=1

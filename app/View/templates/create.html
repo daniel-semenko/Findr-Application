@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Post Research Opportunity</h1>
+
+    {% if form %}
+
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <p> {{ form.title.label }}</p>
+                <p> {{ form.title(class='textinput') }}</p>
+
+                {% for error in form.title.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                <p> {{ form.goals.label }}</p>
+                <p> {{ form.goals(class='formbody') }}</p>
+
+                {% for error in form.goals.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                <p> {{ form.startdate.label }}</p>
+                <p> {{ form.startdate(class='textinput') }}</p>
+
+                {% for error in form.startdate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                <p> {{ form.enddate.label }}</p>
+                <p> {{ form.enddate(class='textinput') }}</p>
+
+                {% for error in form.enddate.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                <p> {{ form.commitment.label }}</p>
+                <p> {{ form.commitment(class='formbody') }}</p>
+
+                {% for error in form.commitment.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                <p> {{ form.qualifications.label }}</p>
+                <p>{{ form.qualifications(class='formbody') }}</p>
+
+                {% for error in form.qualifications.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                <p> {{ form.fields.label }}</p>
+                <p>{{ form.fields(class='forminput') }}</p>
+
+                {% for error in form.fields.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+            <p>{{ form.submit(class='button') }}</p>
+        </form>
+    {% endif %}
+
+
+  {% endblock %}

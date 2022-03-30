@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Choose an option below!</h2>
+
+    <table>
+        <tr>
+            <td><a href="{{ url_for('routes.display_profile') }}" class = "button">My Profile</a></td>
+            <td><a href="{{ url_for('routes.opportunities') }}" class = "button">Research Opportunities</a></td>
+        </tr>
+    </table>
+
+{% endblock %}
